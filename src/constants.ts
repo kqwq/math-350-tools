@@ -22,9 +22,9 @@ const tools = [
   },
 
   {
-    name: 'Exponential Modular ',
-    description: 'Find b^a mod m',
-    link: '/exp',
+    name: 'Fast Modular Exponentiation',
+    description: 'Step-by-step output of the fast modular exponentiation algorithm',
+    link: '/fme',
     showOnHome: true
   },
 ]

@@ -1,5 +1,4 @@
 import {
-  Link as ChakraLink,
   Text,
   Code,
   List,
@@ -9,6 +8,7 @@ import {
   Flex,
   Spacer,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import Common from '../components/Common'
 import { tools } from '../constants'
 
@@ -30,10 +30,10 @@ const Index = () => (
           ).map((tool, index) => (
 
             <ListItem key={index}>
-              <ChakraLink href={tool.link}>
+              <Link href={tool.link}>
                 <Text fontSize="xl" color="teal.600" fontWeight="bold">{tool.name}</Text>
                 <Text fontSize="md">{tool.description}</Text>
-              </ChakraLink>
+              </Link>
             </ListItem>
           ))
 

@@ -1,4 +1,5 @@
 import { Box, useColorMode } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 
@@ -26,7 +27,9 @@ const Header = () => {
         textAlign="center"
 
       >
-        Math 350 Tools
+        <Link href="/">
+          Math 350 Tools
+        </Link>
       </Box>
 
       <DarkModeSwitch />
