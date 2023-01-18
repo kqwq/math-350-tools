@@ -6,13 +6,13 @@ const tools = [
     name: 'GCD',
     description: 'Find the greatest common divisor of two numbers',
     link: '/gcd',
-    showOnHome: true
+    // showOnHome: true
   },
   {
     name: 'LCM',
     description: 'Find the least common multiple of two numbers',
     link: '/lcm',
-    showOnHome: true
+    // showOnHome: true
   },
   {
     name: 'Prime Factorization',
