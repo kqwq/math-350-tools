@@ -1,21 +1,50 @@
-import { Input, Box, Flex, InputGroup, Heading, InputLeftAddon, Stack, HStack, Container, Text, Wrap } from '@chakra-ui/react'
+import { Input, Box, Flex, InputGroup, Heading, InputLeftAddon, Stack, HStack, Container, Text, Wrap, Button, Spacer, VStack } from '@chakra-ui/react'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import React, { useState } from 'react'
 import Common from '../components/Common'
 
 const generateLatex = (b: number, n: number, m: number) => {
-  let latexResult = `\\(= ${b}^${n} \\bmod ${m} = ${Math.pow(b, n) % m}\\)`
 
-  // Format: 
+  // Steps
+  var nBinary = n.toString(2); // convert n to binary
+  var x = 1;
+  var power = b % m;
+  var steps = [];
+  let txt;
+  for (var i = nBinary.length - 1; i >= 0; i--) {
+    var bit = nBinary[i];
+    if (bit === "1") {
+      var a = x;
+      x = (x * power) % m;
+      txt = `\\(i = ${nBinary.length - i}\\) : Because \\(a_{${nBinary.length - i}} = ${bit}\\), we have \\(x = ${a} \\times ${power} \\bmod ${m} = ${x}\\)`
+      steps.push(txt)
+    } else {
+      // Same as above, but without updating x
+      txt = `\\(i = ${nBinary.length - i}\\) : Because \\(a_{${nBinary.length - i}} = ${bit}\\), we have \\(x = ${x}\\)`
+      steps.push(txt)
+    }
+    let powerBefore = power;
+    power = (power * power) % m;
+    txt = `\\(\\hspace{1cm} power = ${powerBefore}^2 \\bmod ${m} = ${power}\\).`
+
+    steps.push(txt)
+
+  }
+
+  // Result
+  let latexResult = `\\(= ${b}^ { ${n}
+    } \\bmod ${m} = ${x} \\)`
 
   return {
-    latexSteps,
+    latexSteps: steps,
     latexResult
   }
 
 }
 
-
+const setId = (id: string, value: string) => {
+  (document.getElementById(id) as HTMLInputElement).value = value
+}
 
 const exp = () => {
   const [b, setB] = useState<number>(0)
@@ -24,7 +53,8 @@ const exp = () => {
   const { latexSteps, latexResult } = generateLatex(b, n, m)
 
 
-  //`\\(\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\\)`
+  //`\\(\\frac{ 1 } { \\sqrt{ 2\\pi\\sigma ^ 2 } } e ^ {-\\frac{ (x -\\mu)^ 2 } { 2\\sigma ^ 2 }
+
   return (
     <>
 
@@ -38,20 +68,30 @@ const exp = () => {
         <Heading size="md" mb={4}>
           Input
         </Heading>
+        <Button mb={2} colorScheme={'teal'} size="sm" onClick={() => {
+          setB(3)
+          setN(2003)
+          setM(99)
+          setId("in-b", "3")
+          setId("in-n", "2003")
+          setId("in-m", "99")
+        }}> Autofill</Button>
+
         <Wrap spacing={2} shouldWrapChildren={true} direction="row">
+
           <InputGroup>
             <InputLeftAddon children="Base (b)" />
-            <Input placeholder="Integer" width="150px" onChange={(e) => setB(parseInt(e.target.value))} />
+            <Input id="in-b" placeholder="Integer" width="150px" onChange={(e) => setB(parseInt(e.target.value))} />
           </InputGroup>
 
           <InputGroup>
             <InputLeftAddon children="Exponent (n)" />
-            <Input placeholder="Integer" width="150px" onChange={(e) => setN(parseInt(e.target.value))} />
+            <Input id="in-n" placeholder="Integer" width="150px" onChange={(e) => setN(parseInt(e.target.value))} />
           </InputGroup>
 
           <InputGroup>
             <InputLeftAddon children="Modulo (m)" />
-            <Input placeholder="Integer" width="150px" onChange={(e) => setM(parseInt(e.target.value))} />
+            <Input id="in-m" placeholder="Integer" width="150px" onChange={(e) => setM(parseInt(e.target.value))} />
           </InputGroup>
         </Wrap>
         <Box mt={8}>
@@ -59,17 +99,26 @@ const exp = () => {
             Output
           </Heading>
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit quaerat error quas, dicta ipsam rerum unde amet laboriosam autem. Ab laudantium earum sequi exercitationem, eaque repellat totam molestiae labore omnis.
-
 
           </Text>
           <MathJaxContext>
-            <h2>Result</h2>
+            <Heading size="sm" mb={4}>Result</Heading>
             <MathJax dynamic inline>{latexResult}</MathJax>
 
 
-            <h2>Steps</h2>
-            <MathJax dynamic>{latexSteps}</MathJax>
+            <Heading size="sm" my={4}>Steps</Heading>
+            <VStack spacing={2} align="start">
+              {
+
+                latexSteps.map((step, index) => {
+                  return (
+                    <>
+                      <MathJax dynamic inline key={index}>{step}</MathJax>
+                    </>
+                  )
+                })
+              }
+            </VStack>
           </MathJaxContext>
         </Box>
       </Container>
