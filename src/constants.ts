@@ -20,13 +20,13 @@ const tools = [
     link: '/prime-factorization',
     showOnHome: true
   },
-  {
-    name: 'Prime xxx',
-    description: 'Find all prime numbers between two numbers',
-    link: '/prime-numbers',
-    showOnHome: true
-  }
 
+  {
+    name: 'Exponential Modular ',
+    description: 'Find b^a mod m',
+    link: '/exp',
+    showOnHome: true
+  },
 ]
 
 
