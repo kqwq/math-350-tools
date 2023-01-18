@@ -45,16 +45,20 @@ const generateLatex = (b: number, n: number, m: number) => {
 
 
   // Steps
+  let txt;
   var nBinary = n.toString(2); // convert n to binary
+  txt = `\\(n = ${n}\\)`
+  steps.push(txt)
+  txt = `\\(a_i = (${nBinary})_2\\), the binary expansion of \\(n\\).`
+  steps.push(txt)
   var x = 1;
   var power = b % m;
-  let txt;
   for (var i = nBinary.length - 1; i >= 0; i--) {
     var bit = nBinary[i];
     if (bit === "1") {
       var a = x;
       x = (x * power) % m;
-      txt = `\\(i = ${nBinary.length - i}\\) : Because \\(a_{${nBinary.length - i}} = ${bit}\\), we have \\(x = ${a} \\times ${power} \\bmod ${m} = ${x}\\)`
+      txt = `\\(i = ${nBinary.length - i}\\) : Because \\(a_{${nBinary.length - i}} = ${bit}\\), we have \\(x = ${a} \\cdot ${power} \\bmod ${m} = ${x}\\)`
       steps.push(txt)
     } else {
       // Same as above, but without updating x

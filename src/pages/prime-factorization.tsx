@@ -7,7 +7,7 @@ import CommonH3 from '../components/CommonH3'
 import Common from '../components/Nav'
 
 function factor(n: number) {
-  if (n > 100000000) {
+  if (n > 1000000000) {
     return ["too\\space large"];
   } else if (n < 2) {
     return ["too\\space small"];
@@ -33,7 +33,7 @@ const primeFactorization = () => {
   const [n, setN] = React.useState(2)
 
   const factors = factor(n);
-  const expandedString = "\\(" + factors.join(" \\times ") + "\\)"
+  const expandedString = "\\(" + factors.join(" \\cdot ") + "\\)"
   const exponent = factors.reduce((acc, cur) => {
     if (acc[cur] === undefined) {
       acc[cur] = 1;
@@ -44,13 +44,13 @@ const primeFactorization = () => {
   }, {});
   const exponentString = "\\(" + Object.keys(exponent).map((key) => {
     return `${key}^{${exponent[key]}}`
-  }).join(" \\times ") + "\\)"
+  }).join(" \\cdot ") + "\\)"
 
 
   return (
 
     <CommonContainer title="Prime Factorization">
-      <Text>Find the prime factors of any number!</Text>
+      <Text>Find the prime factors of any number less than a billion!</Text>
       <CommonH2>Input</CommonH2>
       <InputGroup>
         <InputLeftAddon children="Number" />
