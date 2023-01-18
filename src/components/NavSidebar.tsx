@@ -2,7 +2,7 @@ import { HamburgerIcon } from '@chakra-ui/icons'
 import { Box, Icon, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 
-const Sidebar = () => {
+const NavSidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const btnRef = React.useRef()
@@ -50,4 +50,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default NavSidebar

@@ -1,11 +1,13 @@
+import { Container, Heading } from '@chakra-ui/react'
 import React from 'react'
-import Common from '../components/Common'
+import Common from '../components/Nav'
 
 const primeFactorization = () => {
   return (
     <>
       <Common />
-      <div>prime-factorization</div>
+
+
     </>
   )
 }

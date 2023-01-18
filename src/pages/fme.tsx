@@ -1,7 +1,8 @@
 import { Input, Box, Flex, InputGroup, Heading, InputLeftAddon, Stack, HStack, Container, Text, Wrap, Button, Spacer, VStack } from '@chakra-ui/react'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import React, { useState } from 'react'
-import Common from '../components/Common'
+import CommonContainer from '../components/CommonContainer'
+import Common from '../components/Nav'
 
 const generateLatex = (b: number, n: number, m: number) => {
 
@@ -91,73 +92,67 @@ const exp = () => {
   //`\\(\\frac{ 1 } { \\sqrt{ 2\\pi\\sigma ^ 2 } } e ^ {-\\frac{ (x -\\mu)^ 2 } { 2\\sigma ^ 2 }
 
   return (
-    <>
 
-      <Common />
-      {/* 3 inputs for b, n, and m. Each with a label and a description, width = 150px. */}
-      <Container mt={4}>
 
-        <Heading as="h3" size="xl" my={8} fontFamily="monospace">
-          Fast Modular Exponentiation
-        </Heading>
+    <CommonContainer title="Fast Modular Exponentiation" >
+      <Heading size="md" mb={4}>
+        Input
+      </Heading>
+      <Button mb={2} colorScheme={'teal'} size="sm" onClick={() => {
+        setB(3)
+        setN(2003)
+        setM(99)
+        setId("in-b", "3")
+        setId("in-n", "2003")
+        setId("in-m", "99")
+      }}> Example</Button>
+
+      <Wrap spacing={2} shouldWrapChildren={true} direction="row">
+
+        <InputGroup>
+          <InputLeftAddon children="Base (b)" />
+          <Input id="in-b" placeholder="Integer" width="150px" onChange={(e) => setB(Number(e.target.value))} />
+        </InputGroup>
+
+        <InputGroup>
+          <InputLeftAddon children="Exponent (n)" />
+          <Input id="in-n" placeholder="Integer" width="150px" onChange={(e) => setN(Number(e.target.value))} />
+        </InputGroup>
+
+        <InputGroup>
+          <InputLeftAddon children="Modulo (m)" />
+          <Input id="in-m" placeholder="Integer" width="150px" onChange={(e) => setM(Number(e.target.value))} />
+        </InputGroup>
+      </Wrap>
+      <Box mt={8}>
         <Heading size="md" mb={4}>
-          Input
+          Output
         </Heading>
-        <Button mb={2} colorScheme={'teal'} size="sm" onClick={() => {
-          setB(3)
-          setN(2003)
-          setM(99)
-          setId("in-b", "3")
-          setId("in-n", "2003")
-          setId("in-m", "99")
-        }}> Example</Button>
+        <Text>
 
-        <Wrap spacing={2} shouldWrapChildren={true} direction="row">
-
-          <InputGroup>
-            <InputLeftAddon children="Base (b)" />
-            <Input id="in-b" placeholder="Integer" width="150px" onChange={(e) => setB(Number(e.target.value))} />
-          </InputGroup>
-
-          <InputGroup>
-            <InputLeftAddon children="Exponent (n)" />
-            <Input id="in-n" placeholder="Integer" width="150px" onChange={(e) => setN(Number(e.target.value))} />
-          </InputGroup>
-
-          <InputGroup>
-            <InputLeftAddon children="Modulo (m)" />
-            <Input id="in-m" placeholder="Integer" width="150px" onChange={(e) => setM(Number(e.target.value))} />
-          </InputGroup>
-        </Wrap>
-        <Box mt={8}>
-          <Heading size="md" mb={4}>
-            Output
-          </Heading>
-          <Text>
-
-          </Text>
-          <MathJaxContext>
-            <Heading size="sm" mb={4}>Result</Heading>
-            <MathJax dynamic inline>{latexResult}</MathJax>
+        </Text>
+        <MathJaxContext>
+          <Heading size="sm" mb={4}>Result</Heading>
+          <MathJax dynamic inline>{latexResult}</MathJax>
 
 
-            <Heading size="sm" my={4}>Steps</Heading>
-            <VStack spacing={2} align="start">
-              {
+          <Heading size="sm" my={4}>Steps</Heading>
+          <VStack spacing={2} align="start">
+            {
 
-                latexSteps.map((step, index) => {
-                  return (
-                    <>
-                      <MathJax dynamic inline key={index}>{step}</MathJax>
-                    </>
-                  )
-                })
-              }
-            </VStack>
-          </MathJaxContext>
-        </Box>
-      </Container>
-    </>
+              latexSteps.map((step, index) => {
+                return (
+                  <>
+                    <MathJax dynamic inline key={index}>{step}</MathJax>
+                  </>
+                )
+              })
+            }
+          </VStack>
+        </MathJaxContext>
+      </Box>
+    </CommonContainer >
+
   )
 }
 

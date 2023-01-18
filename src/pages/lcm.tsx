@@ -1,5 +1,5 @@
 import React from 'react'
-import Common from '../components/Common'
+import Common from '../components/Nav'
 
 const lcm = () => {
   return (

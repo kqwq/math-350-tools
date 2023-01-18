@@ -10,14 +10,14 @@ import {
   Container,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import Common from '../components/Common'
+import Nav from '../components/Nav'
 import { tools } from '../constants'
 
 
 
 const Index = () => (
   <>
-    <Common />
+    <Nav />
     <Container >
 
       <Text mt="10%" fontSize="6xl">Welcome to Math 350 Tools!</Text>

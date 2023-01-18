@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 
-const Header = () => {
+const NavBackground = () => {
   const { colorMode } = useColorMode()
 
   return (
@@ -37,4 +37,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default NavBackground
