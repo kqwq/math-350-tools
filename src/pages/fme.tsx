@@ -5,11 +5,46 @@ import Common from '../components/Common'
 
 const generateLatex = (b: number, n: number, m: number) => {
 
+  // Check domains
+  let isError = false;
+  var steps = [];
+  if (b < 2) {
+    steps.push(`b must be greater than 1.`)
+    isError = true;
+  }
+  if (n < 0) {
+    steps.push(`n must be nonnegative.`)
+    isError = true;
+  }
+  if (m < 2) {
+    steps.push(`m must be greater than 1.`)
+    isError = true;
+  }
+  if (Number.isInteger(b) === false) {
+    steps.push(`b must be an integer.`)
+    isError = true;
+  }
+  if (Number.isInteger(n) === false) {
+    steps.push(`n must be an integer.`)
+    isError = true;
+  }
+  if (Number.isInteger(m) === false) {
+    steps.push(`m must be an integer.`)
+    isError = true;
+  }
+  if (isError) {
+    return {
+      latexSteps: steps,
+      latexResult: ""
+    }
+  }
+
+
+
   // Steps
   var nBinary = n.toString(2); // convert n to binary
   var x = 1;
   var power = b % m;
-  var steps = [];
   let txt;
   for (var i = nBinary.length - 1; i >= 0; i--) {
     var bit = nBinary[i];
@@ -75,23 +110,23 @@ const exp = () => {
           setId("in-b", "3")
           setId("in-n", "2003")
           setId("in-m", "99")
-        }}> Autofill</Button>
+        }}> Example</Button>
 
         <Wrap spacing={2} shouldWrapChildren={true} direction="row">
 
           <InputGroup>
             <InputLeftAddon children="Base (b)" />
-            <Input id="in-b" placeholder="Integer" width="150px" onChange={(e) => setB(parseInt(e.target.value))} />
+            <Input id="in-b" placeholder="Integer" width="150px" onChange={(e) => setB(Number(e.target.value))} />
           </InputGroup>
 
           <InputGroup>
             <InputLeftAddon children="Exponent (n)" />
-            <Input id="in-n" placeholder="Integer" width="150px" onChange={(e) => setN(parseInt(e.target.value))} />
+            <Input id="in-n" placeholder="Integer" width="150px" onChange={(e) => setN(Number(e.target.value))} />
           </InputGroup>
 
           <InputGroup>
             <InputLeftAddon children="Modulo (m)" />
-            <Input id="in-m" placeholder="Integer" width="150px" onChange={(e) => setM(parseInt(e.target.value))} />
+            <Input id="in-m" placeholder="Integer" width="150px" onChange={(e) => setM(Number(e.target.value))} />
           </InputGroup>
         </Wrap>
         <Box mt={8}>
