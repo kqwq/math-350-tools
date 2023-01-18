@@ -14,7 +14,7 @@ const CommonContainer = ({
       <Container mt={4}>
 
         <Heading as="h3" size="xl" my={8} fontFamily="monospace">
-          Fast Modular Exponentiation
+          {title}
         </Heading>
         {children}
       </Container>

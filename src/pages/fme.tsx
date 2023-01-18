@@ -2,6 +2,8 @@ import { Input, Box, Flex, InputGroup, Heading, InputLeftAddon, Stack, HStack, C
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import React, { useState } from 'react'
 import CommonContainer from '../components/CommonContainer'
+import CommonH2 from '../components/CommonH2'
+import CommonH3 from '../components/CommonH3'
 import Common from '../components/Nav'
 
 const generateLatex = (b: number, n: number, m: number) => {
@@ -95,9 +97,8 @@ const exp = () => {
 
 
     <CommonContainer title="Fast Modular Exponentiation" >
-      <Heading size="md" mb={4}>
-        Input
-      </Heading>
+
+      <CommonH2>Input</CommonH2>
       <Button mb={2} colorScheme={'teal'} size="sm" onClick={() => {
         setB(3)
         setN(2003)
@@ -125,18 +126,16 @@ const exp = () => {
         </InputGroup>
       </Wrap>
       <Box mt={8}>
-        <Heading size="md" mb={4}>
-          Output
-        </Heading>
+        <CommonH2>Output</CommonH2>
         <Text>
 
         </Text>
         <MathJaxContext>
-          <Heading size="sm" mb={4}>Result</Heading>
+          <CommonH3>Result</CommonH3>
           <MathJax dynamic inline>{latexResult}</MathJax>
 
 
-          <Heading size="sm" my={4}>Steps</Heading>
+          <CommonH3>Steps</CommonH3>
           <VStack spacing={2} align="start">
             {
 
