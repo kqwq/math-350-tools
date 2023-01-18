@@ -7,6 +7,7 @@ import {
   Box,
   Flex,
   Spacer,
+  Container,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import Common from '../components/Common'
@@ -17,12 +18,12 @@ import { tools } from '../constants'
 const Index = () => (
   <>
     <Common />
-    <Flex direction="column" align="center" justify="center" h="100vh">
+    <Container >
 
-      <Text fontSize="6xl">Welcome to Math 350 Tools!</Text>
+      <Text mt="10%" fontSize="6xl">Welcome to Math 350 Tools!</Text>
       <Text fontSize="2xl">This is a collection of tools for Discrete math taught at Liberty University.</Text>
 
-      <Text mt={10} fontSize="2xl">Popular tools</Text>
+      <Text mt={10} fontSize="2xl" textAlign="center">Popular tools</Text>
       <List spacing={3} mt={5}>
         {
           tools.filter(
@@ -40,7 +41,7 @@ const Index = () => (
         }
       </List>
 
-    </Flex>
+    </Container>
 
   </>
 )
