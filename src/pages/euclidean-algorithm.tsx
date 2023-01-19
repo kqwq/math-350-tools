@@ -29,14 +29,19 @@ const generateEuclideanAlgorithm = (a: number, b: number) => {
   if (isError) {
     return {
       latexSteps: steps,
-      latexResult: ""
+      latexResult: "",
+      isError: isError
     }
   }
 
   let r = a;
+  let rList = [b, a];
+  let qList = [];
   while (r !== 0) {
     let q = Math.floor(b / r);
     let rNew = b - q * r;
+    qList.push(q);
+    rList.push(rNew);
     steps.push(`\\(${b} = ${r} \\cdot ${q} + ${rNew}\\)`)
     b = r;
     r = rNew;
@@ -48,7 +53,10 @@ const generateEuclideanAlgorithm = (a: number, b: number) => {
 
   return {
     latexSteps: steps,
-    latexResult: result
+    latexResult: result,
+    qList,
+    rList,
+    isError
   }
 }
 
@@ -101,4 +109,5 @@ const EuclideanAlgorithm = () => {
   )
 }
 
+export { generateEuclideanAlgorithm }
 export default EuclideanAlgorithm
