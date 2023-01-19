@@ -74,6 +74,12 @@ function generateExtendedEuclideanAlgorithm(a: number, b: number, basicEuclidean
 
   }
 
+  if (b > a) {
+    // Swap order so that a*s + b*t = gcd(a, b)
+    let temp = s;
+    s = t;
+    t = temp;
+  }
 
   return {
     latexSteps: steps,
