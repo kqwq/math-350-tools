@@ -1,4 +1,4 @@
-import { Box, useColorMode } from '@chakra-ui/react'
+import { Box, Flex, HStack, Image, useColorMode } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import { DarkModeSwitch } from './DarkModeSwitch'
@@ -19,7 +19,7 @@ const NavBackground = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Box
+      <HStack
 
         as="h1"
         fontSize="2xl"
@@ -27,10 +27,12 @@ const NavBackground = () => {
         textAlign="center"
 
       >
+        <Image src="/site-icon.png" alt="logo" width="22px" />
+
         <Link href="/">
           Math 350 Tools
         </Link>
-      </Box>
+      </HStack>
 
       <DarkModeSwitch />
     </Box>

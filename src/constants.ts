@@ -27,6 +27,11 @@ const tools = [
     name: "Extended Euclidean Algorithm",
     description: "Find the greatest common divisor of two numbers and the coefficients of the Bézout identity",
     link: "/ext-euclidean-algorithm",
+  },
+  {
+    name: "Chinese Remainder Theorem",
+    description: "Find the solution to a system of congruences",
+    link: "/chinese-remainder-theorem",
   }
 
 
