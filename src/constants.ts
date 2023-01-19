@@ -7,7 +7,7 @@ const tools = [
     description: 'Step-by-step output of the fast modular exponentiation algorithm',
     link: '/fme',
     luClass: "350 week 1",
-    showOnHome: true
+    // showOnHome: true
   },
   {
     name: 'Prime Factorization',
@@ -32,6 +32,7 @@ const tools = [
     name: "Chinese Remainder Theorem",
     description: "Find the solution to a system of congruences",
     link: "/chinese-remainder-theorem",
+    showOnHome: true
   }
 
 
