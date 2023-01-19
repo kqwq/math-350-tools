@@ -63,30 +63,48 @@ function applyChineseRemainderTheorem(aList: number[], mList: number[]) {
   // ...
   txt = `To solve for \\(y_k\\) : \\(M_k \\cdot y_k \\equiv 1 \\pmod{m_k}\\) `;
   steps.push(txt)
+  let yList = [];
   for (let i = 0; i < mList.length; i++) {
     let sub = i + 1;
     // Show setup
     txt = `\\(${MList[i]} \\cdot y_{${sub}} \\equiv 1 \\pmod{${mList[i]}}\\)`
 
 
-    let [y, x] = findBezoutCoefficients(aList[i], mList[i]);
+    let [y, x] = findBezoutCoefficients(MList[i], mList[i])
     console.log(y, x)
+    let yValue = (y + mList[i]) % mList[i]
+    yList.push(yValue)
 
     // Right arrow y_{sub} = yValue
-    txt += ` \\( \\rightarrow y_{${sub}} = ${x}\\)`
-
+    txt += ` \\( \\rightarrow y_{${sub}} = ${yValue}\\)`
     steps.push(txt)
-
-
   }
 
   // x congru. a1 * M1 * y1 + a2 * M2 * y2 + ...
+  let innerTxt = aList.map((_, i) => {
+    let sub = i + 1;
+    return `a_{${sub}} M_{${sub}} y_{${sub}}`
+  }).join(" + ")
+  txt = `\\(x \\equiv ${innerTxt} \\pmod{m}\\)`
+  steps.push(txt)
+
+  // Now replace the values
+  let total = 0;
+  let innerValues = aList.map((_, i) => {
+    let sub = i + 1;
+    total += aList[i] * MList[i] * yList[i]
+    return `${aList[i]} \\cdot ${MList[i]} \\cdot ${yList[i]}`
+  }).join(" + ")
+  txt = `\\(x \\equiv ${innerValues} \\pmod{${m}}\\)`
+  steps.push(txt)
+  txt = `\\(x \\equiv ${total} \\pmod{${m}} = ${total % m}\\)`
+  steps.push(txt)
 
 
 
   return {
     latexSteps: steps,
-    latexResult: "aaa"
+    latexResult: (total % m).toString(),
   }
 
 }
