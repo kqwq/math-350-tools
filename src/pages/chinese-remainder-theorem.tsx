@@ -11,6 +11,19 @@ function findBezoutCoefficients(a: number, b: number) {
 
 function applyChineseRemainderTheorem(aList: number[], mList: number[]) {
 
+  // m = m1 * m2 * ...
+
+  // M1 = m / m1
+  // M2 = m / m2
+  // ...
+
+  // y1 = (solve for bezout coef. for a1 * y1 congru. m1)
+  // ...
+
+  // x congru. a1 * M1 * y1 + a2 * M2 * y2 + ...
+
+
+
   return {
     latexSteps: [],
     latexResult: "aaa"

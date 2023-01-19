@@ -4,5 +4,5 @@ This is a collection of tools for the Math 350 course at Liberty University. Liv
 
 Framework | UI Library | Language | Package manager
 --- | --- | --- | ---
-NextJS | Chakra | TypeScript | Yarn
+NextJS | Chakra | TypeScript/React | Yarn
 
