@@ -4,28 +4,88 @@ import CommonContainer from '../components/CommonContainer'
 import CommonH2 from '../components/CommonH2'
 
 function findBezoutCoefficients(a: number, b: number) {
-  if (b === 0) return [1, 0];
-  let [s, t] = findBezoutCoefficients(b, a % b);
-  return [t, s - Math.floor(a / b) * t];
+  let x = 0, y = 1, u = 1, v = 0;
+  while (a !== 0) {
+    let q = Math.floor(b / a), r = b % a;
+    let m = x - u * q, n = y - v * q;
+    b = a, a = r, x = u, y = v, u = m, v = n;
+  }
+  return [x, y];
 }
+
 
 function applyChineseRemainderTheorem(aList: number[], mList: number[]) {
 
+  let isError = false;
+  let steps = [];
+  let txt = ""
+  for (let i = 0; i < aList.length; i++) {
+    if (mList[i] <= 1) {
+      steps.push(`m${i + 1} must be greater than 1.`)
+      isError = true;
+    } else if (Number.isInteger(mList[i]) === false || Number.isInteger(aList[i]) === false) {
+      steps.push(`m${i + 1} and a${i + 1} must be integers.`)
+      isError = true;
+    }
+  }
+  if (isError) {
+    return {
+      latexSteps: steps,
+      latexResult: "",
+      isError: isError
+    }
+  }
+
+  let m = mList.reduce((a, b) => a * b, 1); // Product of all m's
+  let mTxt = mList.map((_, i) => `m_{${i + 1}}`).join(" \\cdot ")
+  let mValues = mList.map((_, i) => mList[i]).join(" \\cdot ")
+  console.log(mTxt);
+
+
   // m = m1 * m2 * ...
+  txt = `\\(m = ${mTxt} = ${mValues} = ${m}\\)`
+  steps.push(txt)
 
   // M1 = m / m1
   // M2 = m / m2
   // ...
+  let MList = mList.map((_, i) => {
+    let M = m / mList[i];
+    let MTxt = `M_{${i + 1}}`
+    let MValues = `\\frac{${m}}{${mList[i]}}`
+    txt = `\\(${MTxt} = \\frac{m}{m_{${i + 1}}} = ${MValues} = ${M}\\)`
+    steps.push(txt)
+    return M;
+  })
+
 
   // y1 = (solve for bezout coef. for a1 * y1 congru. m1)
   // ...
+  txt = `To solve for \\(y_k\\) : \\(M_k \\cdot y_k \\equiv 1 \\pmod{m_k}\\) `;
+  steps.push(txt)
+  for (let i = 0; i < mList.length; i++) {
+    let sub = i + 1;
+    // Show setup
+    txt = `\\(${MList[i]} \\cdot y_{${sub}} \\equiv 1 \\pmod{${mList[i]}}\\)`
+
+
+    let [y, x] = findBezoutCoefficients(aList[i], mList[i]);
+    console.log(y, x)
+
+    // Right arrow y_{sub} = yValue
+    txt += ` \\( \\rightarrow y_{${sub}} = ${x}\\)`
+
+    steps.push(txt)
+
+
+  }
 
   // x congru. a1 * M1 * y1 + a2 * M2 * y2 + ...
 
 
 
   return {
-    latexSteps: [],
+    latexSteps: steps,
     latexResult: "aaa"
   }
 
@@ -49,25 +109,25 @@ const ChineseRemainderTheorem = () => {
 
             <InputGroup key={index}>
               <InputLeftAddon children={"x ≡ "} />
+              <Input w="100px" defaultValue={aList[index]} placeholder={
+                `m${index + 1} `
+              } type="number" onChange={(e) => {
+                const newList = [...aList]
+                newList[index] = parseInt(e.target.value)
+                setAList(newList)
+              }
+              } value={aList[index]} />
+
+
+              <InputAddon ml="12px" children={`% `} />
               <Input w="100px" defaultValue={mList[index]} placeholder={
-                `m${index + 1}`
+                `a${index + 1} `
               } type="number" onChange={(e) => {
                 const newList = [...mList]
                 newList[index] = parseInt(e.target.value)
                 setMList(newList)
               }
               } value={mList[index]} />
-
-
-              <InputAddon ml="12px" children={`%`} />
-              <Input w="100px" defaultValue={a} placeholder={
-                `a${index + 1}`
-              } type="number" onChange={(e) => {
-                const newList = [...aList]
-                newList[index] = parseInt(e.target.value)
-                setAList(newList)
-              }
-              } value={a} />
             </InputGroup>
           ))
 
