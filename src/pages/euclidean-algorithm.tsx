@@ -53,7 +53,7 @@ const generateEuclideanAlgorithm = (a: number, b: number) => {
 
   return {
     latexSteps: steps,
-    latexResult: result,
+    latexResult: result.toString(),
     qList,
     rList,
     isError
@@ -69,7 +69,7 @@ const EuclideanAlgorithm = () => {
   } = generateEuclideanAlgorithm(a, b)
 
   return (
-    <CommonContainer title="Euclidean Algorithm">
+    <CommonContainer title="Euclidean Algorithm" latexSteps={latexSteps} latexResult={latexResult}>
       <Text>Find the greatest common divisor of two numbers using the Euclidean Algorithm.</Text>
       <CommonH2>Input</CommonH2>
       <Wrap spacing={2} shouldWrapChildren={true} direction="row">
@@ -83,28 +83,6 @@ const EuclideanAlgorithm = () => {
           <Input type="number" value={b} onChange={(e) => setB(parseInt(e.target.value))} />
         </InputGroup>
       </Wrap>
-
-      <CommonH2>Output</CommonH2>
-      <MathJaxContext>
-        <CommonH3>Result</CommonH3>
-        <MathJax dynamic inline>{latexResult}</MathJax>
-
-        <CommonH3>Steps</CommonH3>
-
-
-        <VStack spacing={2} align="start">
-          {
-            latexSteps.map((step, index) => {
-              return (
-                <MathJax dynamic inline key={index}>{step}</MathJax>
-              )
-            })
-
-          }
-        </VStack>
-      </MathJaxContext>
-
-
     </CommonContainer>
   )
 }

@@ -20,8 +20,8 @@ const Index = () => (
     <Nav />
     <Container >
 
-      <Text mt="10%" fontSize="6xl">Welcome to Math 350 Tools!</Text>
-      <Text fontSize="2xl">This is a collection of tools for Discrete math taught at Liberty University.</Text>
+      <Text mt="10%" fontSize="4xl">Welcome to Math 350 Tools!</Text>
+      <Text fontSize="md">This is a collection of tools for the discrete math course taught at Liberty University.</Text>
 
       <Text mt={10} fontSize="2xl" textAlign="center">Popular tools</Text>
       <List spacing={3} mt={5}>

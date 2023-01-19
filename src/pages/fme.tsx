@@ -100,7 +100,7 @@ const exp = () => {
   return (
 
 
-    <CommonContainer title="Fast Modular Exponentiation" >
+    <CommonContainer title="Fast Modular Exponentiation" latexResult={latexResult} latexSteps={latexSteps}>
 
       <CommonH2>Input</CommonH2>
       <Button mb={2} colorScheme={'teal'} size="sm" onClick={() => {
@@ -129,31 +129,7 @@ const exp = () => {
           <Input id="in-m" placeholder="Integer" width="150px" onChange={(e) => setM(Number(e.target.value))} />
         </InputGroup>
       </Wrap>
-      <Box mt={8}>
-        <CommonH2>Output</CommonH2>
-        <Text>
 
-        </Text>
-        <MathJaxContext>
-          <CommonH3>Result</CommonH3>
-          <MathJax dynamic inline>{latexResult}</MathJax>
-
-
-          <CommonH3>Steps</CommonH3>
-          <VStack spacing={2} align="start">
-            {
-
-              latexSteps.map((step, index) => {
-                return (
-                  <>
-                    <MathJax dynamic inline key={index}>{step}</MathJax>
-                  </>
-                )
-              })
-            }
-          </VStack>
-        </MathJaxContext>
-      </Box>
     </CommonContainer >
 
   )
