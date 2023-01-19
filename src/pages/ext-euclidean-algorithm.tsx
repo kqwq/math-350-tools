@@ -7,7 +7,7 @@ import CommonH3 from '../components/CommonH3'
 import { generateEuclideanAlgorithm } from './euclidean-algorithm'
 
 
-function placeMinusSignsInNicePositions(gcd: number, leftTerm1: number, leftTerm2: number, rightTerm1: number, rightTerm2: number, thirdTermOverride: any = false) {
+function placeMinusSignsInNicePositions(gcd: number, leftTerm1: number, leftTerm2: number, rightTerm1: number, rightTerm2: number, fourthTermOverride: any = false) {
   if (leftTerm2 < 0) {
     leftTerm1 = -leftTerm1;
     leftTerm2 = -leftTerm2;
@@ -15,11 +15,11 @@ function placeMinusSignsInNicePositions(gcd: number, leftTerm1: number, leftTerm
   if (rightTerm2 < 0) {
     rightTerm1 = -rightTerm1;
     rightTerm2 = -rightTerm2;
-    if (thirdTermOverride) thirdTermOverride = "-" + thirdTermOverride;
+    // if (thirdTermOverride) thirdTermOverride = "-" + thirdTermOverride;
   }
   let middleSign = rightTerm1 < 0 ? "" : "+";
   return `
-  \\(${gcd} = ${leftTerm1} \\cdot ${leftTerm2} ${middleSign} ${thirdTermOverride || rightTerm1} \\cdot ${rightTerm2}\\)
+  \\(${gcd} = ${leftTerm1} \\cdot ${leftTerm2} ${middleSign} ${rightTerm1} \\cdot ${fourthTermOverride || rightTerm2}\\)
   `
 }
 
@@ -65,7 +65,7 @@ function generateExtendedEuclideanAlgorithm(a: number, b: number, basicEuclidean
 
 
     // steps.push(txt);
-    steps.push(placeMinusSignsInNicePositions(theGcd, s, r2, (r3 - r2 * q3), t, `(${r3} - ${q3} \\cdot ${r2})`))
+    steps.push(placeMinusSignsInNicePositions(theGcd, s, r2, t, (r3 - r2 * q3), `(${r3} - ${q3} \\cdot ${r2})`))
 
     // Simplify
     let sWas = s;
