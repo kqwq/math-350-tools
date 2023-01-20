@@ -33,6 +33,11 @@ const tools = [
     description: "Find the solution to a system of congruences",
     link: "/chinese-remainder-theorem",
     showOnHome: true
+  },
+  {
+    name: "Primitive Root Checker",
+    description: "Check if a number is a primitive root modulo a prime",
+    link: "/primitive-root-checker",
   }
 
 
